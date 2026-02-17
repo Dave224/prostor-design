@@ -1,0 +1,65 @@
+<wpml-config>
+    <admin-texts>
+        <key name="footer-header-settings-main-contact-header-phone">
+        </key>
+        <key name="footer-header-settings-main-contact-header-email">
+        </key>
+        <key name="footer-header-settings-footer-career-title">
+        </key>
+        <key name="footer-header-settings-footer-career-desc">
+        </key>
+        <key name="footer-header-settings-footer-career-link-text">
+        </key>
+        <key name="footer-header-settings-footer-career-link-url">
+        </key>
+        <key name="footer-header-settings-footer-map-url">
+        </key>
+
+
+        <key name="theme-settings-form-contact-email">
+        </key>
+        <key name="theme-settings-form-settings-service-title">
+        </key>
+        <key name="theme-settings-form-settings-service-desc">
+        </key>
+        <key name="theme-settings-form-settings-technology-title">
+        </key>
+        <key name="theme-settings-form-settings-technology-desc">
+        </key>
+
+        <key name="theme-settings-serivces-fast-contact-title">
+        </key>
+        <key name="theme-settings-serivces-fast-contact-desc">
+        </key>
+        <key name="theme-settings-serivces-fast-contact-call-title">
+        </key>
+        <key name="theme-settings-serivces-fast-contact-call-desc">
+        </key>
+
+        <key name="theme-settings-technologies-fast-contact-title">
+        </key>
+        <key name="theme-settings-technologies-fast-contact-desc">
+        </key>
+        <key name="theme-settings-technologies-fast-contact-call-title">
+        </key>
+        <key name="theme-settings-technologies-fast-contact-call-desc">
+        </key>
+
+        <key name="theme-settings-contact-city">
+        </key>
+        <key name="theme-settings-contact-zip">
+        </key>
+        <key name="theme-settings-contact-contact-phone">
+        </key>
+        <key name="theme-settings-contact-contact-email">
+        </key>
+        <key name="theme-settings-contact-description">
+        </key>
+        <key name="theme-settings-contact-dic">
+        </key>
+        <key name="theme-settings-contact-ico">
+        </key>
+        <key name="theme-settings-contact-establishment">
+        </key>
+    </admin-texts>
+</wpml-config>

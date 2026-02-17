@@ -1,0 +1,30 @@
+.admin-modal-button-open {
+  cursor:pointer;
+}
+
+.icon-preview-box {
+  opacity: 1;
+  transition-property: background, opacity, border;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
+  background: #ffffff;
+  border: 0.0625rem solid #e5e5e5;
+}
+
+.icon-preview-box:hover{
+  opacity: 0.7;
+  transition-property: background, opacity, border;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
+  background: #f1f1f1;
+  border: 0.0625rem solid #0071a1;
+}
+
+.icon-picker-field::placeholder{
+  color: #0071a1;
+}
+
+.admin-modal-close {
+  width:1.8125rem!important;
+  height:1.8125rem!important;
+}
