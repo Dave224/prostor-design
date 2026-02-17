@@ -318,6 +318,24 @@ class ThemeSettingsModel extends \KT_WP_Options_Base_Model
         return $this->getOption(ThemeSettingsConfig::FORM_SETTINGS_TECHNOLOGY_DESC);
     }
 
+    //* --- Kanonické URL
+    //* --- Prefix: Canonical
+
+    public function getCanonicalDynamicField()
+    {
+        return $this->getOption(ThemeSettingsConfig::PRODUCT_CANONICAL_SETTING_FIELD);
+    }
+
+    public function getCanonicalDynamicFieldFirstItem()
+    {
+        return $this->getCanonicalDynamicField()[0][ThemeSettingsConfig::CANONICAL_CATEGORY];
+    }
+
+    public function isCanonicalFieldFirstItem()
+    {
+        return Util::issetAndNotEmpty($this->getCanonicalDynamicFieldFirstItem());
+    }
+
     //? --- veřejné metody ------------------------------------------------------
 
     //* --- Nastavení formuláře

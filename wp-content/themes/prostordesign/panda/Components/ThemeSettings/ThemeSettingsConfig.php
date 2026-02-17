@@ -3,6 +3,7 @@
 namespace Components\ThemeSettings;
 
 use Components\Person\Person;
+use Components\Product\Product;
 use Interfaces\Configable;
 use Components\Block\Block;
 use KT_Text_Field;
@@ -34,6 +35,14 @@ class ThemeSettingsConfig implements Configable
             self::RECAPTCHA_FIELDSET                    => self::getRecaptchaFieldset(),
             self::LINK_FIELDSET                         => self::getLinkFieldset(),
             self::FORM_SETTINGS_FIELDSET                => self::getFormSettingsFieldset(),
+            self::PRODUCT_CANONICAL_SETTING_FIELDSET    => self::getProductCanonicalSettingsFieldset(),
+        ];
+    }
+
+    public static function getAllDynamicFieldsets()
+    {
+        return [
+            self::CANONICAL_FIELDSET    => self::getCanonicalFieldset(),
         ];
     }
 
@@ -272,6 +281,47 @@ class ThemeSettingsConfig implements Configable
         $fieldset->setPostPrefix(self::LINK_FIELDSET);
 
         $fieldset->addSwitch(self::LINK_TYPE, __("Styl odkazu (Technologie - slider):", "PD_ADMIN_DOMAIN"), "Tlačítko", "Odkaz");
+
+        return $fieldset;
+    }
+
+    // --- CANONICAL ------------------------
+
+    const PRODUCT_CANONICAL_SETTING_FIELDSET = self::FORM_PREFIX . "-canonical";
+    const PRODUCT_CANONICAL_SETTING_FIELD     = self::PRODUCT_CANONICAL_SETTING_FIELDSET . "-field";
+
+    public static function getProductCanonicalSettingsFieldset()
+    {
+        $fieldset = new \KT_Form_Fieldset(self::PRODUCT_CANONICAL_SETTING_FIELDSET, __("Nastavení kanonických URL", "PD_ADMIN_DOMAIN"));
+        $fieldset->setPostPrefix(self::PRODUCT_CANONICAL_SETTING_FIELDSET);
+
+        $fieldset->addFieldset(self::PRODUCT_CANONICAL_SETTING_FIELD, __("Nastavení kanonických URL", "PD_ADMIN_DOMAIN"), [self::class, self::CANONICAL_FIELDSET]);
+
+        return $fieldset;
+    }
+
+    const CANONICAL_FIELDSET    = self::FORM_PREFIX . "-specification";
+    const CANONICAL_PRODUCT     = self::CANONICAL_FIELDSET . "-product";
+    const CANONICAL_CATEGORY    = self::CANONICAL_FIELDSET . "-category";
+
+    public static function getCanonicalFieldset()
+    {
+        $fieldset = new \KT_Form_Fieldset(self::CANONICAL_FIELDSET, __("Nastavení kanonických URL", "PD_ADMIN_DOMAIN"));
+        $fieldset->setPostPrefix(self::CANONICAL_FIELDSET);
+
+        $fieldset->addSelect(self::CANONICAL_CATEGORY, __("Kategorie, pro kterou chcete nastavit kanonickou URL:", "PD_ADMIN_DOMAIN"))
+            ->setFirstEmpty()
+            ->setDataManager(new \KT_Taxonomy_Data_Manager('product_cat'));
+
+        $fieldset->addSelect(self::CANONICAL_PRODUCT, __("Produkt, který bude použit pro výše vybranou kategorii jako kanonická URL:", "PD_ADMIN_DOMAIN"))
+            ->setFirstEmpty()
+            ->setDataManager(new \KT_Custom_Post_Data_Manager([
+                "post_type" => Product::KEY,
+                "post_status" => "publish",
+                "posts_per_page" => -1,
+                "orderby" => "menu_order",
+                "order" => \KT_Repository::ORDER_ASC,
+            ]));
 
         return $fieldset;
     }

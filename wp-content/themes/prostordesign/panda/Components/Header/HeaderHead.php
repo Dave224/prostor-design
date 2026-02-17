@@ -1,6 +1,12 @@
 <?php
 
-use Utils\Util; ?>
+use Utils\Util;
+use Components\ThemeSettings\ThemeSettingsFactory;
+use Components\ThemeSettings\ThemeSettingsConfig;
+use Components\Product\Product;
+
+$Theme = ThemeSettingsFactory::create();
+?>
 
 <head>
     <meta charset="utf-8" />
@@ -27,6 +33,21 @@ use Utils\Util; ?>
     <meta name="theme-color" content="#ffffff">
 
     <?php Util::renderAnalyticsHeaderCode(); ?>
+
+    <?php if (is_singular(Product::KEY)) {
+        if ($Theme->isCanonicalFieldFirstItem()) {
+            foreach ($Theme->getCanonicalDynamicField() as $item) {
+                if ($item[ThemeSettingsConfig::CANONICAL_PRODUCT] != get_queried_object_id()) {
+                    $terms = get_the_terms(get_queried_object_id(), 'product_cat');
+                    foreach ($terms as $term) {
+                        if ($term->term_id == $item[ThemeSettingsConfig::CANONICAL_CATEGORY]) { ?>
+                            <link rel="canonical" href="<?= get_permalink($item[ThemeSettingsConfig::CANONICAL_PRODUCT]); ?>" />
+                        <?php }
+                    }
+                }
+            }
+         }
+    } ?>
 
     <?php wp_head(); ?>
 
