@@ -2,11 +2,12 @@
 
 use Components\SchemaGenerator\SchemaGenerator;
 use Components\ThemeSettings\ThemeSettingsFactory;
+use Components\PopUpSettings\PopUpSettingsFactory;
 
 $Theme = ThemeSettingsFactory::create();
 $PostCount = wp_count_posts(KT_WP_POST_KEY);
 $PageCount = wp_count_posts(KT_WP_PAGE_KEY);
-
+$PopUpSettings = PopUpSettingsFactory::create();
 ?>
 
 </main>
@@ -22,7 +23,12 @@ $PageCount = wp_count_posts(KT_WP_PAGE_KEY);
 <?php
 get_template_part(COMPONENTS_PATH . "Footer/partials/FooterRecaptcha");
 wp_footer();
-SchemaGenerator::render(); ?>
+SchemaGenerator::render();
+
+if ($PopUpSettings->isPopUpButtonShow()) {
+    get_template_part(COMPONENTS_PATH . "Footer/partials/FooterPopUp");
+}
+?>
 </body>
 
 </html>

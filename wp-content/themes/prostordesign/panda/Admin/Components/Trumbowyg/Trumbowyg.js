@@ -11,6 +11,7 @@
 				lang: "cs",
 				btns: [
 					['viewHTML'],
+					['formatting'],
 					['undo', 'redo'],
 					['strong'],
 					['link'],

@@ -36,8 +36,8 @@
     }
   },
   "require-dev": {
-    "symfony/var-dumper": "^6.4",
+    "symfony/var-dumper": "^6.0",
     "tracy/tracy": "^2.10",
-    "symfony/error-handler": "^7.2"
+    "symfony/error-handler": "^6.0"
   }
 }

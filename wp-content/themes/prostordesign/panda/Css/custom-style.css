@@ -1,0 +1,87 @@
+.pd-exit[aria-hidden="true"]{ display:none; }
+.pd-exit{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    font: inherit; /* přebírá font webu */
+}
+
+.pd-exit__backdrop{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    backdrop-filter: blur(4px);
+}
+
+.pd-exit__dialog{
+    position: relative;
+    width: min(560px, 100%);
+    background: #ffffff;
+    border: 1px solid rgba(17,17,17,.12);
+    border-radius: 16px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.20);
+    padding: 28px 26px;
+}
+
+.pd-exit__x{
+    position:absolute;
+    background: #0085d2;
+    color: #ffffff;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(17,17,17,.12);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-transition: background-color .2s, color .2s, -webkit-box-shadow .2s;
+    transition: background-color .2s, color .2s, -webkit-box-shadow .2s;
+    transition: background-color .2s, box-shadow .2s, color .2s;
+    transition: background-color .2s, box-shadow .2s, color .2s, -webkit-box-shadow .2s;
+    -webkit-user-select: none;
+}
+
+.pd-exit__title{
+    margin: 0 44px 10px 0;
+    font-size: 22px;
+    letter-spacing: .2px;
+    color: #e1332b;
+}
+
+.pd-exit__actions{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pd-exit__btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.5rem;
+    text-decoration:none;
+    cursor:pointer;
+    background: transparent;
+    font: inherit;
+}
+
+.pd-exit__btn--ghost:hover,
+.pd-exit__x:hover {
+    background-color: #0757a7;
+    -webkit-box-shadow: 0 .1875rem .8125rem #3772ff85;
+    box-shadow: 0 .1875rem .8125rem #3772ff85;
+}
+
+@media (prefers-reduced-motion: no-preference){
+    .pd-exit__dialog{ animation: pdPop .18s ease-out; }
+    @keyframes pdPop{
+        from{ transform: translateY(10px); opacity: 0; }
+        to{ transform: translateY(0); opacity: 1; }
+    }
+}

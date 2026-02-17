@@ -41,6 +41,11 @@ $config->assetsConfigurator()
     ->setVersion(20231101)
     ->setEnqueue();
 
+$config->assetsConfigurator()
+    ->addStyle("custom-added-style", get_template_directory_uri() . "/panda/Css/custom-style.css")
+    ->setVersion(2026021702)
+    ->setEnqueue();
+
 // --- scripty ------------------------------
 
 $config->assetsConfigurator()
@@ -117,6 +122,11 @@ $config->setEnableDynamicFieldsets();
 $config->initialize();
 
 KT_Termmeta::activate();
+
+// --- Podstránka Nastavení Popupu
+
+$popUpSubpage = new \KT_Custom_Metaboxes_Subpage("themes.php", __("Nastavení PopUp okna", "KT_CORE_DOMAIN"), __("Nastavení PopUp okna", "KT_CORE_DOMAIN"), "update_core", POPUP_SETTINGS_PAGE);
+$popUpSubpage->setRenderSaveButton()->register();
 
 // --- Podstránka Nastavení hlavičky a patičky
 
