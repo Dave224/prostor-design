@@ -85,3 +85,194 @@
         to{ transform: translateY(0); opacity: 1; }
     }
 }
+
+/* FILTRACE */
+
+.pd-filter{
+    margin: 18px 0 26px;
+}
+
+.pd-filter__form{
+    background: #fff;
+    border: 1px solid rgba(17,17,17,.12);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+/* GRID: automaticky tolik sloupců, kolik se vejde */
+.pd-filter__grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.pd-filter__field{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pd-filter__label{
+    font-size: 16px;
+    letter-spacing: .2px;
+    color: rgba(17,17,17,.80);
+}
+
+/* Select styl */
+.pd-filter__select{
+    width: 100%;
+    height: 44px;
+    padding: 10px 38px 10px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(17,17,17,.14);
+    background: #fff;
+
+    font: inherit;
+    color: #111;
+    outline: none;
+
+    appearance: none; /* vlastní šipka */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image:
+            linear-gradient(45deg, transparent 50%, rgba(17,17,17,.7) 50%),
+            linear-gradient(135deg, rgba(17,17,17,.7) 50%, transparent 50%);
+    background-position:
+            calc(100% - 18px) 19px,
+            calc(100% - 12px) 19px;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+}
+
+.pd-filter__select:focus{
+    border-color: rgba(17,17,17,.35);
+    box-shadow: 0 0 0 3px rgba(17,17,17,.08);
+}
+
+/* Spodní lišta */
+.pd-filter__bar{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 14px;
+    padding-top: 14px;
+}
+
+.pd-filter__meta{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    min-height: 22px;
+    color: rgba(17,17,17,.70);
+    font-size: 14px;
+}
+
+.pd-filter__status{
+    color: rgba(17,17,17,.65);
+}
+
+/* Akce */
+.pd-filter__actions{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.pd-filter__btn{
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(17,17,17,.14);
+    background: #fff;
+    color: #111;
+    font: inherit;
+    cursor: pointer;
+}
+
+.pd-filter__btn:hover{
+    background: rgba(17,17,17,.04);
+}
+
+/* Mobil: bar pod sebe */
+@media (max-width: 640px){
+    .pd-filter__form{ padding: 14px; }
+    .pd-filter__bar{
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .pd-filter__actions{
+        justify-content: stretch;
+    }
+    .pd-filter__btn{
+        width: 100%;
+    }
+}
+
+.pd-no-results{
+    padding:18px;
+    border:1px dashed rgba(17,17,17,.25);
+    border-radius:16px;
+    color:rgba(17,17,17,.75);
+    background:rgba(0,0,0,.02);
+}
+
+/* ===== Fullscreen loader (pulzující tečky) ===== */
+.pd-loader[aria-hidden="true"]{ display:none; }
+
+.pd-loader{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:grid;
+    place-items:center;
+}
+
+.pd-loader__backdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(4px);
+}
+
+.pd-loader__panel{
+    position:relative;
+    background:#fff;
+    border:1px solid rgba(17,17,17,.12);
+    border-radius:16px;
+    padding:14px 16px;
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    box-shadow:0 24px 70px rgba(0,0,0,.20);
+}
+
+.pd-dots{
+    display:inline-flex;
+    gap:6px;
+    align-items:center;
+}
+.pd-dots span{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(17,17,17,.85);
+    opacity:.35;
+    animation:pdDot 1s infinite ease-in-out;
+}
+.pd-dots span:nth-child(2){ animation-delay:.15s; }
+.pd-dots span:nth-child(3){ animation-delay:.30s; }
+
+@keyframes pdDot{
+    0%, 100% { transform:translateY(0); opacity:.35; }
+    50%      { transform:translateY(-3px); opacity:1; }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .pd-dots span{ animation:none; opacity:1; }
+}
+
+html.pd-loading, body.pd-loading{ overflow:hidden; }
+.pd-loader__text{ font:inherit; color:rgba(17,17,17,.85); font-size:14px; }

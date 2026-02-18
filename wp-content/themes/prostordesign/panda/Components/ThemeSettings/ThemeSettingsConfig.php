@@ -35,6 +35,7 @@ class ThemeSettingsConfig implements Configable
             self::RECAPTCHA_FIELDSET                    => self::getRecaptchaFieldset(),
             self::LINK_FIELDSET                         => self::getLinkFieldset(),
             self::FORM_SETTINGS_FIELDSET                => self::getFormSettingsFieldset(),
+            self::FILTRATION_FIELDSET                   => self::getFiltrationFieldset(),
             self::PRODUCT_CANONICAL_SETTING_FIELDSET    => self::getProductCanonicalSettingsFieldset(),
         ];
     }
@@ -322,6 +323,23 @@ class ThemeSettingsConfig implements Configable
                 "orderby" => "menu_order",
                 "order" => \KT_Repository::ORDER_ASC,
             ]));
+
+        return $fieldset;
+    }
+
+    // --- FILTRATION ------------------------
+
+    const FILTRATION_FIELDSET       = self::FORM_PREFIX . "-filtration";
+    const FILTRATION_TITLE          = self::FILTRATION_FIELDSET . "-title";
+    const FILTRATION_DESCRIPTION    = self::FILTRATION_FIELDSET . "-description";
+
+    public static function getFiltrationFieldset()
+    {
+        $fieldset = new \KT_Form_Fieldset(self::FILTRATION_FIELDSET, __("Nastavení filtrace", "PD_ADMIN_DOMAIN"));
+        $fieldset->setPostPrefix(self::FILTRATION_FIELDSET);
+
+        $fieldset->addText(self::FILTRATION_TITLE, __("Titulek:", "PD_ADMIN_DOMAIN"));
+        $fieldset->addTextarea(self::FILTRATION_DESCRIPTION, __("Popisek:", "PD_ADMIN_DOMAIN"));
 
         return $fieldset;
     }

@@ -27,6 +27,7 @@ class ProductConfig implements Configable
             self::PARAMS_FIELDSET                   => self::getParamsFieldset(),
             self::DYNAMIC_SPECIFICATION_FIELDSET    => self::getDynamicSpecificationFieldset(),
             self::DYNAMIC_COLORS_FIELDSET           => self::getDynamicColorsFieldset(),
+            self::DYNAMIC_FILTRATION_FIELDSET       => self::getDynamicFiltrationFieldset(),
         ];
     }
 
@@ -40,6 +41,7 @@ class ProductConfig implements Configable
         return [
             self::SPECIFICATION_FIELDSET    => self::getSpecificationFieldset(),
             self::COLORS_FIELDSET           => self::getColorsFieldset(),
+            self::FILTRATION_FIELDSET       => self::getFiltrationFieldset(),
         ];
     }
 
@@ -125,6 +127,36 @@ class ProductConfig implements Configable
         $fieldset->setPostPrefix(self::DYNAMIC_COLORS_FIELDSET);
 
         $fieldset->addFieldset(self::DYNAMIC_COLORS_FIELD, __("Barvy", "PD_ADMIN_DOMAIN"), [self::class, self::COLORS_FIELDSET]);
+
+        return $fieldset;
+    }
+
+    // --- FILTRACE ---------------------------
+
+    const FILTRATION_FIELDSET    = self::FORM_PREFIX . "-filtration";
+    const FILTRATION_TITLE       = self::FILTRATION_FIELDSET . "-title";
+    const FILTRATION_VALUE       = self::FILTRATION_FIELDSET . "-value";
+
+    public static function getFiltrationFieldset()
+    {
+        $fieldset = new \KT_Form_Fieldset(self::FILTRATION_FIELDSET, __("Vlastnosti pro filtraci", "PD_ADMIN_DOMAIN"));
+        $fieldset->setPostPrefix(self::FILTRATION_FIELDSET);
+
+        $fieldset->addText(self::FILTRATION_TITLE, __("Název:", "PD_ADMIN_DOMAIN"));
+        $fieldset->addText(self::FILTRATION_VALUE, __("Hodnota:", "PD_ADMIN_DOMAIN"));
+
+        return $fieldset;
+    }
+
+    const DYNAMIC_FILTRATION_FIELDSET = self::FORM_PREFIX . "-dynamic-filtration";
+    const DYNAMIC_FILTRATION_FIELD = self::DYNAMIC_FILTRATION_FIELDSET . "-field";
+
+    public static function getDynamicFiltrationFieldset()
+    {
+        $fieldset = new \KT_Form_Fieldset(self::DYNAMIC_FILTRATION_FIELDSET, __("Vlastnosti pro filtraci", "PD_ADMIN_DOMAIN"));
+        $fieldset->setPostPrefix(self::DYNAMIC_FILTRATION_FIELDSET);
+
+        $fieldset->addFieldset(self::DYNAMIC_FILTRATION_FIELD, __("Vlastnosti pro filtraci", "PD_ADMIN_DOMAIN"), [self::class, self::FILTRATION_FIELDSET]);
 
         return $fieldset;
     }

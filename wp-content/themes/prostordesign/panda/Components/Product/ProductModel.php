@@ -572,6 +572,19 @@ class ProductModel extends \KT_WP_Post_Base_Model
         return $this->getColorsDynamicField()[0][ProductConfig::COLORS_TITLE];
     }
 
+    //* --- Filtrace
+    //* --- Prefix: Filtration
+
+    public function getFiltrationDynamicField()
+    {
+        return $this->getMetaValue(ProductConfig::DYNAMIC_FILTRATION_FIELD);
+    }
+
+    public function getFiltrationDynamicFieldFirstItem()
+    {
+        return $this->getFiltrationDynamicField()[0][ProductConfig::FILTRATION_VALUE];
+    }
+
     //? --- Issety ------------------------------------------------------
 
     //* --- Parametry
@@ -606,6 +619,14 @@ class ProductModel extends \KT_WP_Post_Base_Model
     public function isColorsFieldFirstItem()
     {
         return Util::issetAndNotEmpty($this->getColorsDynamicFieldFirstItem());
+    }
+
+    //* --- Filtrace
+    //* --- Prefix: Filtration
+
+    public function isFiltrationFieldFirstItem()
+    {
+        return Util::issetAndNotEmpty($this->getFiltrationDynamicFieldFirstItem());
     }
 
     //* --- Cena

@@ -3,6 +3,8 @@
 namespace Components\ThemeSettings;
 
 use Components\Person\PersonFactory;
+use Components\Product\ProductConfig;
+use Components\Product\ProductFactory;
 use Utils\Image;
 use Utils\uString;
 use Utils\Util;
@@ -21,6 +23,26 @@ class ThemeSettingsModel extends \KT_WP_Options_Base_Model
     public function __construct()
     {
         parent::__construct(ThemeSettingsConfig::FORM_PREFIX);
+    }
+
+    //? --- Filtrace pro kategorie v eshopu ------------------------
+
+    public function getFiltration($Products): ?array
+    {
+        $Filtration = [];
+        foreach ($Products as $product) {
+            $Product = ProductFactory::createByPost($product);
+            if ($Product->isFiltrationFieldFirstItem()) {
+                foreach ($Product->getFiltrationDynamicField() as $item) {
+                    if (array_key_exists($item[ProductConfig::FILTRATION_TITLE], $Filtration)) {
+                        array_push($Filtration[$item[ProductConfig::FILTRATION_TITLE]], $item[ProductConfig::FILTRATION_VALUE]);
+                    } else {
+                        $Filtration[$item[ProductConfig::FILTRATION_TITLE]] = [$item[ProductConfig::FILTRATION_VALUE]];
+                    }
+                }
+            }
+        }
+        return $Filtration;
     }
 
     //? --- getry & setry ------------------------
@@ -318,6 +340,19 @@ class ThemeSettingsModel extends \KT_WP_Options_Base_Model
         return $this->getOption(ThemeSettingsConfig::FORM_SETTINGS_TECHNOLOGY_DESC);
     }
 
+    //* --- Nastavení filtrace
+    //* --- Prefix: Filtration
+
+    public function getFiltrationTitle(): ?string
+    {
+        return $this->getOption(ThemeSettingsConfig::FILTRATION_TITLE);
+    }
+
+    public function getFiltrationDescription(): ?string
+    {
+        return $this->getOption(ThemeSettingsConfig::FILTRATION_DESCRIPTION);
+    }
+
     //* --- Kanonické URL
     //* --- Prefix: Canonical
 
@@ -585,5 +620,23 @@ class ThemeSettingsModel extends \KT_WP_Options_Base_Model
     public function isFormSettingsTechnologyDesc(): bool
     {
         return Util::issetAndNotEmpty($this->getFormSettingsTechnologyDesc());
+    }
+
+    //* --- Nastavení filtrace
+    //* --- Prefix: Filtration
+
+    public function isFiltrationTitle(): bool
+    {
+        return Util::issetAndNotEmpty($this->getFiltrationTitle());
+    }
+
+    public function isFiltrationDescription(): bool
+    {
+        return Util::issetAndNotEmpty($this->getFiltrationDescription());
+    }
+
+    public function isFiltrationHeader(): bool
+    {
+        return $this->isFiltrationTitle() || $this->isFiltrationDescription();
     }
 }

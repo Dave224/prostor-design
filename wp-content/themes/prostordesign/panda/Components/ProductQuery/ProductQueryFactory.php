@@ -10,8 +10,8 @@ use Components\ProductQuery\ProductQuery;
  */
 class ProductQueryFactory
 {
-    public static function create($Count = ProductQuery::DEFAULT_COUNT, $PostIn = [], $CategoryIds = []): ProductQuery
+    public static function create($Count = ProductQuery::DEFAULT_COUNT, $PostIn = [], $CategoryIds = [], $Filters = []): ProductQuery
     {
-        return new ProductQuery($Count, $PostIn, $CategoryIds);
+        return new ProductQuery($Count, $PostIn, $CategoryIds, $Filters);
     }
 }

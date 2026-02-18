@@ -3,6 +3,7 @@
 namespace Components\ProductQuery;
 
 use Components\Product\Product;
+use Components\Product\ProductConfig;
 use Components\Product\Term\ProductCategory;
 use Utils\Util;
 use Presenters\QueryBase;
@@ -15,13 +16,15 @@ class ProductQuery extends QueryBase
 {
     private $CategoryIds;
     private $PostIn;
+    private $Filters;
 
-    public function __construct($maxCount = self::DEFAULT_COUNT, $PostIn = [], $CategoryIds = [])
+    public function __construct($maxCount = self::DEFAULT_COUNT, $PostIn = [], $CategoryIds = [], $Filters = [])
     {
         parent::__construct($maxCount = self::DEFAULT_COUNT);
         $this->setMaxCount($maxCount) ?: self::DEFAULT_COUNT;
         $this->setPostIn($PostIn);
         $this->setCategoryIds($CategoryIds);
+        $this->setFilters($Filters);
         $this->setPostType(Product::KEY);
         $this->setComponent(Product::class);
         $this->setTemplate(Product::TEMPLATE);
@@ -72,6 +75,20 @@ class ProductQuery extends QueryBase
 
         $Args["tax_query"] = $taxQuery;
 
+        $metaQuery = ["relation" => "AND"];
+        if ($this->isFilters()) {
+            $filters = $this->getFilters();
+            foreach ($filters as $key => $filter) {
+                $value = '"' . $key . '";s:27:"' . ProductConfig::FILTRATION_VALUE . '";s:' . strlen($filter) . ':"' . $filter . '";';
+                array_push($metaQuery, [
+                    'key' => ProductConfig::DYNAMIC_FILTRATION_FIELD,
+                    'value' => $value,
+                    'compare' => 'LIKE',
+                ]);
+            }
+        }
+        $Args["meta_query"] = $metaQuery;
+
         return $this->setArgs($Args);
     }
 
@@ -88,6 +105,21 @@ class ProductQuery extends QueryBase
     public function isCategoryIds()
     {
         return Util::arrayIssetAndNotEmpty($this->getCategoryIds());
+    }
+
+    public function getFilters()
+    {
+        return $this->Filters;
+    }
+
+    public function setFilters(array $Filters)
+    {
+        $this->Filters = $Filters;
+    }
+
+    public function isFilters(): ?bool
+    {
+        return Util::arrayIssetAndNotEmpty($this->getFilters());
     }
 
     public function getPostIn()

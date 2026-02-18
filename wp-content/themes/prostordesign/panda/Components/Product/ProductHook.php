@@ -3,6 +3,54 @@
 use Utils\Util;
 use Components\ThemeSettings\ThemeSettingsFactory;
 use Components\Product\Product;
+use Components\ProductQuery\ProductQueryFactory;
+
+// Filtrace produktů
+
+add_action('wp_enqueue_scripts', function () {
+    // načti jen tam, kde filtr reálně používáš (dle potřeby podmínku uprav)
+    if ( ! is_tax('product_cat') ) return;
+
+    wp_enqueue_script(
+        'pd-filters',
+        get_stylesheet_directory_uri() . '/panda/Js/pd-filters.js',
+        [],
+        '1.0',
+        true
+    );
+
+    wp_localize_script('pd-filters', 'pdFilters', [
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('pd_filters_nonce'),
+    ]);
+});
+
+add_action('wp_ajax_pd_filter_products', 'pd_filter_products_ajax');
+add_action('wp_ajax_nopriv_pd_filter_products', 'pd_filter_products_ajax');
+
+function pd_filter_products_ajax() {
+    check_ajax_referer('pd_filters_nonce', 'nonce');
+
+    $filters_json = isset($_POST['filters']) ? wp_unslash($_POST['filters']) : '{}';
+    $filters = json_decode($filters_json, true);
+    $ProductQuery = ProductQueryFactory::create(9, [], [], $filters);
+
+    ob_start();
+
+    if ($ProductQuery->hasPosts()) {
+        $ProductQuery->thePosts();
+    } else {
+        echo '<div class="pd-no-results">Nic nenalezeno.</div>';
+    }
+
+    $html = ob_get_clean();
+
+    wp_send_json_success([
+        'html'  => $html,
+        'count' => (int) $ProductQuery->getPostsCount(),
+    ]);
+}
+
 
 // Add to cart AJAX calls
 add_action("wp_ajax_get_header_cart_info", "get_header_cart_info");

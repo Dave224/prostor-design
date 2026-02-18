@@ -13,4 +13,9 @@ class ProductFactory
         global $post;
         return new ProductModel($post);
     }
+
+    public static function createByPost($post): ProductModel
+    {
+        return new ProductModel($post);
+    }
 }
