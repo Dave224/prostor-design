@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '4879418e1cddb3faceccdb72d3f89dfbe16d58bc',
+        'reference' => 'b3ff86903d0ab4d17e0f13e45370dbecf2a5140e',
         'name' => 'panda-wp/panda',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '4879418e1cddb3faceccdb72d3f89dfbe16d58bc',
+            'reference' => 'b3ff86903d0ab4d17e0f13e45370dbecf2a5140e',
             'dev_requirement' => false,
         ),
         'psr/log' => array(

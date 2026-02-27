@@ -276,3 +276,115 @@
 
 html.pd-loading, body.pd-loading{ overflow:hidden; }
 .pd-loader__text{ font:inherit; color:rgba(17,17,17,.85); font-size:14px; }
+
+.faq{
+    max-width:1200px;
+    margin:auto;
+    font-family:inherit;
+    margin-top: 3.5rem;
+}
+
+.faq-item{
+    border-radius:10px;
+    margin-bottom:12px;
+    background:#f5f5f5;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,0.05);
+    transition:
+            box-shadow .3s ease,
+            transform .25s ease;
+}
+
+.faq-question{
+    width:100%;
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:600;
+    transition:
+            background .25s ease,
+            transform .2s ease,
+            box-shadow .25s ease;
+}
+
+.faq-question .left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.faq-question .icon{
+    background:#e1332b;
+    color:#ffffff;
+    border-radius:50%;
+    width:28px;
+    height:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    flex:0 0 auto;
+    transition:
+            transform .25s ease,
+            background .25s ease;
+}
+
+/* Smooth open/close */
+.faq-answer{
+    display:grid;
+    grid-template-rows:0fr;         /* zavřeno */
+    transition:grid-template-rows .35s ease;
+}
+
+.faq-answer-inner{
+    overflow:hidden;                 /* nutné pro grid animaci */
+    padding:0 20px 0;
+    opacity:0;
+    transform:translateY(-4px);
+    transition:opacity .25s ease, transform .25s ease, padding .25s ease;
+}
+
+/* otevřeno */
+.faq-item.active .faq-answer{
+    grid-template-rows:1fr;
+}
+
+.faq-item.active .faq-answer-inner{
+    padding:20px 20px 20px;
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Rotace šipky */
+.arrow{
+    display:inline-flex;
+    transition:transform .25s ease;
+    transform:rotate(0deg);
+}
+
+.faq-item.active .arrow{
+    transform:rotate(180deg);
+}
+
+/* Nice hover */
+.faq-question:hover{
+    background:rgba(0,0,0,0.04);
+    transform:translateY(-2px);
+    box-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
+
+.faq-question:hover .icon{
+    transform:scale(1.08);
+    background:#e1332b;
+}
+
+.faq-item:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(0,0,0,0.08);
+}
