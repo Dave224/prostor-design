@@ -1,6 +1,7 @@
 (() => {
     const form = document.getElementById('pdFilterForm');
     const resultsEl = document.getElementById('pdResults');
+    const categoryId = document.getElementById('pdFilterCategory');
 
     if (!form || !resultsEl || typeof pdFilters === 'undefined') return;
 
@@ -51,6 +52,7 @@
         payload.append('action', 'pd_filter_products');
         payload.append('nonce', pdFilters.nonce);
         payload.append('filters', JSON.stringify(serializeFilters()));
+        payload.append('category_id', categoryId.value);
 
         // optional: per-page / ordering
         payload.append('per_page', String(pdFilters.perPage || 12));

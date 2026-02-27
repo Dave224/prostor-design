@@ -24,7 +24,7 @@ $FiltrationItems = $Theme->getFiltration($ProductQueryAll->getPosts());
             <?php } ?>
             <form class="pd-filter__form" id="pdFilterForm">
                 <div class="pd-filter__grid">
-
+                    <input type="hidden" id="pdFilterCategory" value="<?= get_queried_object_id(); ?>">
                     <?php foreach ($FiltrationItems as $key => $FiltrationItem) { ?>
                         <div class="pd-filter__field">
                             <label class="pd-filter__label" for="filter_<?= $key; ?>"><?= $key; ?></label>
@@ -40,7 +40,7 @@ $FiltrationItems = $Theme->getFiltration($ProductQueryAll->getPosts());
                     <div class="pd-filter__bar">
 
                         <div class="pd-filter__actions">
-                            <a href="<?= get_permalink(get_queried_object_id()); ?>" type="button" class="btn --primary" id="pdFilterReset">
+                            <a href="<?= get_term_link(get_queried_object_id(), 'product_cat'); ?>" type="button" class="btn --primary" id="pdFilterReset">
                                 Reset filtrů
                             </a>
                         </div>

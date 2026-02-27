@@ -33,7 +33,11 @@ function pd_filter_products_ajax() {
 
     $filters_json = isset($_POST['filters']) ? wp_unslash($_POST['filters']) : '{}';
     $filters = json_decode($filters_json, true);
-    $ProductQuery = ProductQueryFactory::create(9, [], [], $filters);
+    $categoryIds = [];
+    if (isset($_POST['category_id'])) {
+        $categoryIds = [$_POST['category_id']];
+    }
+    $ProductQuery = ProductQueryFactory::create(9, [], $categoryIds, $filters);
 
     ob_start();
 
