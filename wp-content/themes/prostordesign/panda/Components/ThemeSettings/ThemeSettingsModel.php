@@ -34,6 +34,9 @@ class ThemeSettingsModel extends \KT_WP_Options_Base_Model
             $Product = ProductFactory::createByPost($product);
             if ($Product->isFiltrationFieldFirstItem()) {
                 foreach ($Product->getFiltrationDynamicField() as $item) {
+                    if ($Filtration[$item[ProductConfig::FILTRATION_TITLE]] && in_array($item[ProductConfig::FILTRATION_VALUE], $Filtration[$item[ProductConfig::FILTRATION_TITLE]])) {
+                        continue;
+                    }
                     if (array_key_exists($item[ProductConfig::FILTRATION_TITLE], $Filtration)) {
                         array_push($Filtration[$item[ProductConfig::FILTRATION_TITLE]], $item[ProductConfig::FILTRATION_VALUE]);
                     } else {
