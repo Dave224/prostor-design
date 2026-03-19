@@ -74,6 +74,8 @@ $config->assetsConfigurator()
 
 $config->addWpMenu(NAVIGATION_MAIN_MENU, __("Menu v hlavičce", "PD_DOMAIN"));
 $config->addWpMenu(NAVIGATION_FOOTER_MENU, __("Menu v patičce", "PD_DOMAIN"));
+$config->addWpMenu(FOOTER_CATEOGRIES_MENU, __("Menu v patičce (kategorie eshopu)", "PD_DOMAIN"));
+$config->addWpMenu(FOOTER_SERVICES_MENU, __("Menu v patičce (služby)", "PD_DOMAIN"));
 
 // --- sidebars ------------------------------
 $config->addSidebar(SIDEBAR_MAIN)

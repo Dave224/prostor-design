@@ -17,7 +17,10 @@ $PopUpSettings = PopUpSettingsFactory::create();
     <div class="container">
         <?php get_template_part(COMPONENTS_PATH . "Footer/partials/FooterTop"); ?>
         <?php get_template_part(COMPONENTS_PATH . "Footer/partials/FooterMap"); ?>
+        <?php get_template_part(COMPONENTS_PATH . "Footer/partials/FooterBottom"); ?>
+
     </div>
+
 </footer>
 
 <?php

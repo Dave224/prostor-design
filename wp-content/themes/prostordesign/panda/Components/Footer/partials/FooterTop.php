@@ -95,7 +95,4 @@ $MenuName = $MenuObject ? $MenuObject->name : null;
         </div>
 
     </div>
-
-    <?php get_template_part(COMPONENTS_PATH . "Footer/partials/FooterBottom"); ?>
-
 </div>

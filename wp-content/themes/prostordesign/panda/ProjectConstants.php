@@ -13,6 +13,8 @@ define("REST_BRILO_URL", get_site_url() . "/wp-json/brilo/");
 //? Menu
 define("NAVIGATION_MAIN_MENU", "navigation-main-menu");
 define("NAVIGATION_FOOTER_MENU", "navigation-footer-menu");
+define("FOOTER_CATEOGRIES_MENU", "footer-categories-menu");
+define("FOOTER_SERVICES_MENU", "footer-services-menu");
 
 //? Nastavení popUp okna
 define("POPUP_SETTINGS_PAGE", "popup-setting");
