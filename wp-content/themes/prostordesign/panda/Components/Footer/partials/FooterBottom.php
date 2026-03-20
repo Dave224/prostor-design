@@ -16,14 +16,16 @@ $MenuServicesName = $MenuServicesObject ? $MenuServicesObject->name : null;
 
 <div class="footer-bottom row">
     <div class="footer-bottom-top row">
-        <div class="col-lg-12">
-            <div class="footer-menu-box">
-                <h4 class="footer-top__block-title article-heading"><?= $MenuCategoryName; ?></h4>
-                <ul class="footer-menu-list">
-                    <?php KT::theWpNavMenu(FOOTER_CATEOGRIES_MENU, 1); ?>
-                </ul>
+        <?php if (ICL_LANGUAGE_CODE == 'cs') { ?>
+            <div class="col-lg-12">
+                <div class="footer-menu-box">
+                    <h4 class="footer-top__block-title article-heading"><?= $MenuCategoryName; ?></h4>
+                    <ul class="footer-menu-list">
+                        <?php KT::theWpNavMenu(FOOTER_CATEOGRIES_MENU, 1); ?>
+                    </ul>
+                </div>
             </div>
-        </div>
+        <?php } ?>
 
         <div class="col-lg-12">
             <div class="footer-menu-box">
