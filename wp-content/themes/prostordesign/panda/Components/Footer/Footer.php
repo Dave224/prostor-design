@@ -28,7 +28,7 @@ get_template_part(COMPONENTS_PATH . "Footer/partials/FooterRecaptcha");
 wp_footer();
 SchemaGenerator::render();
 
-if ($PopUpSettings->isPopUpButtonShow()) {
+if ($PopUpSettings->isPopUpButtonShow() && ICL_LANGUAGE_CODE == 'cs') {
     get_template_part(COMPONENTS_PATH . "Footer/partials/FooterPopUp");
 }
 ?>
